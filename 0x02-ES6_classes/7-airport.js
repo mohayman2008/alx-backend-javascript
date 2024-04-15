@@ -4,20 +4,20 @@ export default class Airport {
     this.code = code;
   }
 
-  get name() {
-    return this._name;
+  get name() { return this._name; }
+
+  set name(name) {
+    if (typeof (name) !== 'string') throw TypeError('Name must be a string');
+
+    this._name = name;
   }
 
-  set name(value) {
-    this._name = value;
-  }
+  get code() { return this._code; }
 
-  get code() {
-    return this._code;
-  }
+  set code(code) {
+    if (typeof (code) !== 'string') throw TypeError('Code must be a string');
 
-  set code(value) {
-    this._code = value;
+    this._code = code;
   }
 
   get [Symbol.toStringTag]() {
