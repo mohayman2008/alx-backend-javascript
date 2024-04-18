@@ -1,0 +1,6 @@
+node_modules
+package-lock.json
+*.backup
+__tests__
+main.js
+dist
