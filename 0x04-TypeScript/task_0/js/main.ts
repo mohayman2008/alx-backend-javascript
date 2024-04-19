@@ -1,4 +1,4 @@
-interface Student {
+export interface Student {
   firstName: string,
   lastName: string,
   age: number,
@@ -19,7 +19,7 @@ const student2: Student = {
   location: 'Narnia',
 }
 
-const studentsList: Student[] = [student1, student2];
+export const studentsList: Student[] = [student1, student2];
 
 const table: HTMLTableElement = document.createElement('table');
 document.body.appendChild(table);

@@ -12,4 +12,5 @@ const newRowID: RowID = CRUD.insertRow(row);
 const updatedRow: RowElement = Object.create(row);
 updatedRow.age = 23;
 
-CRUD.deleteRow(CRUD.updateRow(newRowID, updatedRow));
+CRUD.updateRow(newRowID, updatedRow);
+CRUD.deleteRow(newRowID);

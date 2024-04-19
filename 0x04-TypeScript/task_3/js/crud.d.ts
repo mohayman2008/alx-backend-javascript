@@ -1,4 +1,4 @@
-import {RowID, RowElement} from 'interface';
+import {RowID, RowElement} from './interface.ts';
 
 export declare function insertRow(row: RowElement): number;
 export declare function deleteRow(rowId: RowID): void;
