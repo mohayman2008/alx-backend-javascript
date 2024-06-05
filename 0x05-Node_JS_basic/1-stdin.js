@@ -1,4 +1,4 @@
-const process = require('process')
+const process = require('process');
 
 process.stdin.setEncoding('utf8');
 process.stdin.on('end', () => {

@@ -1,7 +1,7 @@
-const process = require('process')
+const process = require('process');
 
 function displayMessage(string) {
-  process.stdout.write(string + '\n')
+  process.stdout.write(`${string}\n`);
 }
 
 module.exports = displayMessage;
