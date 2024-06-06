@@ -51,20 +51,30 @@ async function countStudents(path) {
   return output;
 }
 
-const studentsStats = countStudents(argv[2]).catch((err) => {
-  console.error(err.message);
-  process.exit(1);
-});
+async function studentsStats() {
+  return countStudents(argv[2]).catch((err) => {
+    console.error(err.message);
+  });
+}
 
 async function requestListener(req, res) {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
+  let out;
+
   switch (req.url) {
     case '/':
       res.end('Hello Holberton School!', 'utf8');
       break;
 
     case '/students':
-      res.end(`This is the list of our students\n${await studentsStats}`, 'utf8');
+      out = await studentsStats();
+
+      if (out === undefined) {
+        res.writeHead(500, 'Internal Server Error', { 'Content-Type': 'text/plain' });
+        res.end('Cannot load the database');
+      } else {
+        res.end(`This is the list of our students\n${out}`, 'utf8');
+      }
       break;
 
     default:
