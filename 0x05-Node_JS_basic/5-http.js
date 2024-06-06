@@ -54,11 +54,13 @@ async function countStudents(path) {
 async function studentsStats() {
   return countStudents(argv[2]).catch((err) => {
     console.error(err.message);
+    throw err;
   });
 }
 
 async function requestListener(req, res) {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
+  let content;
   let out;
 
   switch (req.url) {
@@ -67,14 +69,19 @@ async function requestListener(req, res) {
       break;
 
     case '/students':
-      out = await studentsStats();
-
+      content = 'This is the list of our students\n';
+      try {
+        out = await studentsStats();
+        res.end(`${content}${out}`, 'utf8');
+      } catch (err) {
+        res.end(`${content}${err.message}`, 'utf8');
+      }
+      /*
       if (out === undefined) {
-        res.writeHead(500, 'Internal Server Error', { 'Content-Type': 'text/plain' });
-        res.end('Cannot load the database');
+        // res.writeHead(500, 'Internal Server Error', { 'Content-Type': 'text/plain' });
       } else {
         res.end(`This is the list of our students\n${out}`, 'utf8');
-      }
+      } */
       break;
 
     default:
