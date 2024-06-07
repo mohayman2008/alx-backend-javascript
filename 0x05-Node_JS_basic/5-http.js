@@ -76,12 +76,6 @@ async function requestListener(req, res) {
       } catch (err) {
         res.end(`${content}${err.message}`, 'utf8');
       }
-      /*
-      if (out === undefined) {
-        // res.writeHead(500, 'Internal Server Error', { 'Content-Type': 'text/plain' });
-      } else {
-        res.end(`This is the list of our students\n${out}`, 'utf8');
-      } */
       break;
 
     default:
@@ -91,7 +85,7 @@ async function requestListener(req, res) {
 
 const app = createServer(requestListener);
 app.listen(1245, () => {
-  console.log(`Server is running on port: ${1245}`);
+  console.log('Server is running on port: 1245');
 });
 
 module.exports = app;

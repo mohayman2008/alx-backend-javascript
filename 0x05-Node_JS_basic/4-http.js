@@ -7,7 +7,7 @@ function requestListener(req, res) {
 
 const app = createServer(requestListener);
 app.listen(1245, () => {
-  console.log(`Server is running on port: ${1245}`);
+  console.log('Server is running on port: 1245');
 });
 
 module.exports = app;
