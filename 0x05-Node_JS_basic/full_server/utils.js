@@ -1,41 +1,37 @@
-import fs from 'fs';
+import { promises as fsPromises } from 'fs';
 
-const readDatabase = (dataPath) => new Promise((resolve, reject) => {
-  if (!dataPath) {
-    reject(new Error('Cannot load the database'));
+async function readDatabase(path) {
+  let data;
+  try {
+    data = await fsPromises.readFile(path, 'utf8');
+  } catch (err) {
+    throw new Error('Cannot load the database');
   }
-  if (dataPath) {
-    fs.readFile(dataPath, (err, data) => {
-      if (err) {
-        reject(new Error('Cannot load the database'));
-      }
-      if (data) {
-        const fileLines = data
-          .toString('utf-8')
-          .trim()
-          .split('\n');
-        const studentGroups = {};
-        const dbFieldNames = fileLines[0].split(',');
-        const studentPropNames = dbFieldNames
-          .slice(0, dbFieldNames.length - 1);
 
-        for (const line of fileLines.slice(1)) {
-          const studentRecord = line.split(',');
-          const studentPropValues = studentRecord
-            .slice(0, studentRecord.length - 1);
-          const field = studentRecord[studentRecord.length - 1];
-          if (!Object.keys(studentGroups).includes(field)) {
-            studentGroups[field] = [];
-          }
-          const studentEntries = studentPropNames
-            .map((propName, idx) => [propName, studentPropValues[idx]]);
-          studentGroups[field].push(Object.fromEntries(studentEntries));
-        }
-        resolve(studentGroups);
-      }
-    });
-  }
-});
+  const lines = data.trim().split('\n');
+  const fieldsNames = lines[0].split(',');
+
+  const students = [];
+  const fieldsStats = {};
+
+  lines.slice(1).forEach((element) => {
+    const student = {};
+
+    const values = element.split(',');
+    for (let i = 0; i < fieldsNames.length; i += 1) {
+      student[fieldsNames[i]] = values[i];
+    }
+    students.push(student);
+
+    const stat = fieldsStats[student.field];
+    if (stat === undefined) {
+      fieldsStats[student.field] = [];
+    }
+
+    fieldsStats[student.field].push(student.firstname);
+  });
+
+  return fieldsStats;
+}
 
 export default readDatabase;
-module.exports = readDatabase;

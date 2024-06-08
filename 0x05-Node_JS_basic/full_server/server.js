@@ -1,13 +1,19 @@
 import express from 'express';
-import mapRoutes from './routes';
 
-const app = express();
+import router from './routes/index';
+
+const DBPath = process.argv[2] || '';
 const PORT = 1245;
+const app = express();
 
-mapRoutes(app);
-app.listen(PORT, () => {
-  console.log(`Server listening on PORT ${PORT}`);
+app.use((req, res, next) => {
+  req.DBPath = DBPath;
+  next();
 });
 
-export default app;
-module.exports = app;
+app.use(router);
+app.listen(PORT, () => {
+  console.log(`Express server started on port ${PORT}`);
+});
+
+export { app as default, DBPath };
