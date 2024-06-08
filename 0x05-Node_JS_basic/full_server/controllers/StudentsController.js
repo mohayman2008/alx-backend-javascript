@@ -1,7 +1,7 @@
-// import { DBPath } from '../server';
 import readDatabase from '../utils';
 
-async function loadDB(response, DBPath) {
+async function loadDB(response) {
+  const DBPath = process.argv[2];
   let students;
 
   try {
@@ -18,7 +18,7 @@ async function loadDB(response, DBPath) {
 
 class StudentsController {
   static async getAllStudents(request, response) {
-    const fieldsStudents = await loadDB(response, request.DBPath);
+    const fieldsStudents = await loadDB(response);
     if (!fieldsStudents) return;
 
     let output = 'This is the list of our students';
@@ -44,7 +44,7 @@ class StudentsController {
       return;
     }
 
-    const fieldsStudents = await loadDB(response, request.DBPath);
+    const fieldsStudents = await loadDB(response);
     if (!fieldsStudents) return;
 
     const list = fieldsStudents[major];
