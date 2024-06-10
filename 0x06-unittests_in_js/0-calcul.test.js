@@ -94,12 +94,12 @@ const TESTS = {
 for (const [testFunc, testCases] of Object.entries(TESTS)) {
   const func = eval(testFunc);
 
-  describe(testFunc, () => {
+  describe(testFunc, function () {
     for (const testCase of testCases) {
-      describe(testCase.testName, () => {
+      describe(testCase.testName, function () {
         for (const test of testCase.tests) {
           const line = `(${test.inputs.join(', ')}) => ${test.expected}`;
-          it(line, () => {
+          it(line, function () {
             assert.equal(func(...test.inputs), test.expected);
           });
         }
