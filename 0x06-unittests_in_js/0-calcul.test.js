@@ -1,36 +1,109 @@
 const assert = require('assert');
 const calculateNumber = require('./0-calcul');
 
-describe('calculateNumber', () => {
-  it('floating point whole numbers', () => {
-    assert.strictEqual(calculateNumber(1.0, 2.0), 3);
-  });
+const TESTS = {
+  calculateNumber: [
+    {
+      testName: 'Case: <a> and <b> = 0',
+      tests: [
+        {
+          inputs: [0, 0],
+          expected: 0,
+        },
+      ],
+    },
+    {
+      testName: 'Checking that <a> is rounded correctly',
+      tests: [
+        {
+          inputs: [0.5, 1],
+          expected: 2,
+        },
+        {
+          inputs: [0.4, 1],
+          expected: 1,
+        },
+        {
+          inputs: [-0.6, 1],
+          expected: 0,
+        },
+        {
+          inputs: [-0.5, 1],
+          expected: 1,
+        },
+      ],
+    },
+    {
+      testName: 'Checking that <b> is rounded correctly',
+      tests: [
+        {
+          inputs: [1, 0.5],
+          expected: 2,
+        },
+        {
+          inputs: [1, 0.4],
+          expected: 1,
+        },
+        {
+          inputs: [1, -0.6],
+          expected: 0,
+        },
+        {
+          inputs: [1, -0.5],
+          expected: 1,
+        },
+      ],
+    },
+    {
+      testName: 'Case: rounding both numbers correctly',
+      tests: [
+        {
+          inputs: [1.2, 0.5],
+          expected: 2,
+        },
+        {
+          inputs: [3.5, 0.4],
+          expected: 4,
+        },
+        {
+          inputs: [3.1, 0.4],
+          expected: 3,
+        },
+        {
+          inputs: [10.6, 5.7],
+          expected: 17,
+        },
+      ],
+    },
+    {
+      testName: 'Case: both numbers are -ve',
+      tests: [
+        {
+          inputs: [-1.7, -0.6],
+          expected: -3,
+        },
+        {
+          inputs: [-7.2, -3.5],
+          expected: -10,
+        },
+      ],
+    },
+  ],
+};
 
-  it('rounding down b\'s floating point fractional number', () => {
-    assert.strictEqual(calculateNumber(1.0, 2.4), 3);
-  });
+for (const [testFunc, testCases] of Object.entries(TESTS)) {
+  const func = eval(testFunc);
 
-  it('rounding down a and b\'s floating point fractional number', () => {
-    assert.strictEqual(calculateNumber(1.4, 2.4), 3);
+  describe(testFunc, () => {
+    for (const testCase of testCases) {
+      describe(testCase.testName, () => {
+        for (const test of testCase.tests) {
+          const line = `(${test.inputs.join(', ')}) => ${test.expected}`;
+          it(line, () => {
+            assert.equal(func(...test.inputs), test.expected);
+          });
+        }
+      });
+    }
   });
-
-  it('rounding down a\'s floating point fractional number', () => {
-    assert.strictEqual(calculateNumber(1.4, 2.0), 3);
-  });
-
-  it('rounding up b\'s floating point fractional numbers', () => {
-    assert.strictEqual(calculateNumber(1.0, 2.5), 4);
-  });
-
-  it('rounding up a and b\'s floating point fractional numbers', () => {
-    assert.strictEqual(calculateNumber(2.6, 2.5), 6);
-  });
-
-  it('rounding up a\'s floating point fractional numbers', () => {
-    assert.strictEqual(calculateNumber(2.6, 2.0), 5);
-  });
-
-  it('rounding down a and b floating point fractional numbers with trailing 9\'s', () => {
-    assert.strictEqual(calculateNumber(2.499999, 3.499999), 5);
-  });
-});
+}
