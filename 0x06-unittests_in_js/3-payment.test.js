@@ -3,15 +3,18 @@ const sinon = require('sinon');
 const Utils = require('./utils');
 const sendPaymentRequestToApi = require('./3-payment');
 
-after(function() {
-  Utils.calculateNumber.restore();
-  console.log.restore();
-});
-
 describe("sendPaymentRequestToApi", function() {
+  before(function () {
+    sinon.spy(console, 'log');
+  })
+
+  after(function () {
+    Utils.calculateNumber.restore();
+    console.log.restore();
+  });
+
   it("Correct output", function() {
     const expected = Utils.calculateNumber('SUM', 100, 20);
-    sinon.spy(console, 'log');
     sinon.spy(Utils, 'calculateNumber');
 
     sendPaymentRequestToApi(100, 20);
@@ -23,6 +26,6 @@ describe("sendPaymentRequestToApi", function() {
     expect(result).to.equal(expected);
   });
   it('Utils.calculateNumber is used', function() {
-    expect(Utils.calculateNumber.calledOnce).to.be.true;
+    expect(Utils.calculateNumber.calledOnceWith('SUM', 100, 20)).to.be.true;
   })
 });
