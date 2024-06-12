@@ -11,6 +11,8 @@ const Utils = {
         if (b === 0) return 'Error';
         return a / b;
     }
+
+    return 0;
   }
 }
 
