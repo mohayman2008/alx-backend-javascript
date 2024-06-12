@@ -5,14 +5,17 @@ const Utils = {
     b = Math.round(b);
     /* eslint-enable */
 
-    if (type === 'SUM') return a + b;
-    if (type === 'SUBTRACT') return a - b;
-    if (type === 'DIVIDE') {
+    switch (type) {
+      case 'SUM':
+        return a + b;
+      case 'SUBTRACT':
+        return a - b;
+      case 'DIVIDE':
         if (b === 0) return 'Error';
         return a / b;
+      default:
+        throw new Error(`Unknown operation: ${type}`);
     }
-
-    return 0;
   }
 }
 
