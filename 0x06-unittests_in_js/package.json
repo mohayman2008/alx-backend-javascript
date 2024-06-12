@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
     "lint-all": "./node_modules/.bin/eslint [0-9]*.js",
-    "test": "./node_modules/mocha/bin/mocha --require babel-register --exit *.test.js [0-9]*api*/*.test.js"
+    "test": "./node_modules/mocha/bin/mocha --require babel-register --exit *.test.js utils.js [0-9]*api*/*.test.js"
   },
   "dependencies": {
     "chai-http": "^4.3.0",

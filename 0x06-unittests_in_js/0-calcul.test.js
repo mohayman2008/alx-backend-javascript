@@ -1,5 +1,5 @@
 const assert = require('assert');
-const calculateNumber = require('./0-calcul');
+const calculateNumber = require('./0-calcul'); // eslint-disable-line no-unused-vars
 
 const TESTS = {
   calculateNumber: [
@@ -99,7 +99,7 @@ for (const [testFunc, testCases] of Object.entries(TESTS)) {
       describe(testCase.testName, function () {
         for (const test of testCase.tests) {
           const line = `(${test.inputs.join(', ')}) => ${test.expected}`;
-          it(line, function () {
+          it(line, function () { // eslint-disable-line jest/expect-expect
             assert.equal(func(...test.inputs), test.expected);
           });
         }

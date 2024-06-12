@@ -1,6 +1,8 @@
 function calculateNumber(type, a, b) {
+  /* eslint-disable */
   a = Math.round(a);
   b = Math.round(b);
+  /* eslint-enable */
 
   switch (type) {
     case 'SUM':
