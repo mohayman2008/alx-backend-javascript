@@ -13,8 +13,6 @@ const Utils = {
       case 'DIVIDE':
         if (b === 0) return 'Error';
         return a / b;
-      default:
-        throw new Error(`Unknown operation: ${type}`);
     }
   }
 }
