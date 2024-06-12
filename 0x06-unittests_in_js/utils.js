@@ -5,12 +5,9 @@ const Utils = {
     b = Math.round(b);
     /* eslint-enable */
 
-    switch (type) {
-      case 'SUM':
-        return a + b;
-      case 'SUBTRACT':
-        return a - b;
-      case 'DIVIDE':
+    if (type === 'SUM') return a + b;
+    if (type === 'SUBTRACT') return a - b;
+    if (type === 'DIVIDE') {
         if (b === 0) return 'Error';
         return a / b;
     }
