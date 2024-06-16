@@ -8,7 +8,7 @@ const PORT = 7865;
 const URL = `http://localhost:${PORT}`;
 
 describe('express api server', function () {
-/*   let running = false;
+  let running = false;
   let apiProcess;
 
   before(function () {
@@ -27,7 +27,7 @@ describe('express api server', function () {
     if (!running) {
       apiProcess.kill();
     }
-  }); */
+  });
 
   it('get "/" route returns the correct data', function (done) {
     request.get(`${URL}/`, (err, res, body) => {
