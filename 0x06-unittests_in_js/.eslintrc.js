@@ -29,6 +29,8 @@ module.exports = {
     'jest/prefer-expect-assertions': 'off',
     'jest/valid-expect': 'off',
     'jest/lowercase-name': 'off',
+    'jest/no-hooks': 'off',
+    'jest/no-test-callback': 'off',
     'no-unused-expressions': 'off',
     'no-restricted-syntax': [
       'error',
