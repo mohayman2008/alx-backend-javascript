@@ -3,7 +3,7 @@ const { fork } = require('child_process');
 const request = require('request');
 
 /* eslint-disable no-undef */
-const API_MODULE = './api.js';
+const API_MODULE = `${__dirname}/api.js`;
 const PORT = 7865;
 const URL = `http://localhost:${PORT}`;
 

@@ -3,9 +3,9 @@ const { fork } = require('child_process');
 const request = require('request');
 
 /* eslint-disable no-undef */
-const API_MODULE = './api.js';
+const API_MODULE = `${__dirname}/api.js`;
 const PORT = 7865;
-const URL = `http://127.0.0.1:${PORT}`;
+const URL = `http://localhost:${PORT}`;
 
 let running = false;
 let apiProcess;
