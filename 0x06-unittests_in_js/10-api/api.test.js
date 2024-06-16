@@ -4,8 +4,8 @@ const request = require('request');
 
 /* eslint-disable no-undef */
 const API_MODULE = './api.js';
-const port = 7865;
-const URL = `http://127.0.0.1:${port}`;
+const PORT = 7865;
+const URL = `http://127.0.0.1:${PORT}`;
 
 let running = false;
 let apiProcess;
