@@ -5,7 +5,7 @@ const request = require('request');
 /* eslint-disable no-undef */
 const API_MODULE = './api.js';
 const PORT = 7865;
-const URL = `http://127.0.0.1:${PORT}`;
+const URL = `http://localhost:${PORT}`;
 
 describe('express api server', function () {
 /*   let running = false;
